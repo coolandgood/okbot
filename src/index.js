@@ -120,6 +120,10 @@ client.on('message', msg => {
     let url = args[0]
     const imageToAscii = require('image-to-ascii')
 
+    if (url[0] === '<' && url[url.length-1] === '>') {
+      url = url.slice(1, -1)
+    }
+
     imageToAscii(url, {
       colored: false,
       size: { height: 20 },
