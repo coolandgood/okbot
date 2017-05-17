@@ -141,4 +141,49 @@ client.on('messageReactionAdd', reaction => {
   }
 })
 
+client.on('message', msg => {
+  // <value><unit> in/to <unit>
+  const regex = /^(-?(?:\d*\.)?\d+)([a-zA-Z]+)\s(?:in|to)\s([a-zA-Z]+)$/
+  let r = regex.exec(msg.content)
+
+  if (r == null)
+    return
+
+  let [ , value, unitFrom, unitTo ] = r
+  value = Number(value)
+  unitFrom = unitFrom.toLowerCase()
+  unitTo = unitTo.toLowerCase()
+
+  const lengthUnits = [ 'in', 'ft', 'mm', 'cm', 'm', 'km' ]
+  if (lengthUnits.includes(unitFrom) && lengthUnits.includes(unitTo)) {
+    // imperial/metric length
+    const im = require('imperial-metric')
+
+    function st(u) {
+      if (u == 'in')
+        return 'inch'
+      if (u == 'ft')
+        return 'foot'
+
+      return u
+    }
+
+    let ans = im(value).from(st(unitFrom)).to(st(unitTo))
+    return msg.channel.send(`${ans}${unitTo}`)
+  }
+
+  const tempUnits = [ 'c', 'f', 'k' ]
+  if (tempUnits.includes(unitFrom) && tempUnits.includes(unitTo)) {
+    // temperature values
+    const t = require('temperature')
+    const u = { c: 'Celsius', f: 'Fahrenheit', k: 'Kelvin' }
+
+    if (unitTo === unitFrom)
+      return
+
+    let ans = t[u[unitFrom].toLowerCase() + 'To' + u[unitTo]](value)
+    return msg.channel.send(`${ans} degrees ${u[unitTo].toLowerCase()}`)
+  }
+})
+
 client.login(config.bot.token)

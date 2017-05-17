@@ -242,6 +242,10 @@ imgpx@^1.0.2:
     lwip-pixels "^1.0.0"
     lwipify "^2.0.0"
 
+imperial-metric@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/imperial-metric/-/imperial-metric-1.2.1.tgz#987567ade562550829fbbd830469395f13f1254f"
+
 is-percent@^1.0.1:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/is-percent/-/is-percent-1.0.8.tgz#7432184aea3b965912221e1a5e25efebe5820a79"
@@ -429,6 +433,10 @@ supports-color@^3.1.2:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
   dependencies:
     has-flag "^1.0.0"
+
+temperature@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/temperature/-/temperature-1.0.3.tgz#33d2ecb06b78358aabffa46d9467370f1c6e7e4b"
 
 terminal-char-width@^1.0.0:
   version "1.0.6"
